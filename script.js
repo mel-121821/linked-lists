@@ -24,6 +24,10 @@ class LinkedList {
   }
 
   // Methods
+  printError_ListEmpty() {
+    console.log("This list is empty!");
+  }
+
   append(value) {
     // add value to the end of the list
     if (this.head == null) {
@@ -43,33 +47,103 @@ class LinkedList {
   }
 
   size() {
-    let sum = 1;
-    let tmp = this.head;
-    while (tmp.nextNode != null) {
-      tmp = tmp.nextNode;
-      sum++;
+    if (this.head == null) {
+      this.printError_ListEmpty();
+    } else {
+      let sum = 1;
+      let tmp = this.head;
+      while (tmp.nextNode != null) {
+        tmp = tmp.nextNode;
+        sum++;
+      }
+      return sum;
     }
-    return sum;
   }
 
   header() {
     if (this.head != null) {
       return this.head;
     } else {
-      console.log("This list is empty!");
-      return null;
+      this.printError_ListEmpty();
     }
   }
 
-  tail() {}
+  tail() {
+    if (this.head == null) {
+      this.printError_ListEmpty();
+    } else {
+      let tmp = this.head;
+      while (tmp.nextNode != null) {
+        tmp = tmp.nextNode;
+      }
+      return tmp;
+    }
+  }
 
-  at(index) {}
+  at(index) {
+    if (this.head == null) {
+      this.printError_ListEmpty();
+    } else {
+      let counter = 0;
+      let tmp = this.head;
+      while (counter < index) {
+        tmp = tmp.nextNode;
+        counter++;
+      }
+      return tmp;
+    }
+  }
 
-  pop() {}
+  pop() {
+    // remove element from the end of the list
+    if (this.head == null) {
+      this.printError_ListEmpty();
+    } else {
+      let tmp = this.head;
+      while (tmp.nextNode.nextNode != null) {
+        tmp = tmp.nextNode;
+      }
+      tmp.nextNode = null;
+    }
+  }
 
-  contains(value) {}
+  contains(value) {
+    if (this.head == null) {
+      this.printError_ListEmpty();
+    } else {
+      let tmp = this.head;
+      while (tmp != null && tmp.value != value) {
+        tmp = tmp.nextNode;
+      }
+      if (tmp == null) {
+        console.log(`${value} was not found`);
+        return false;
+      } else {
+        console.log(`Found value: ${tmp.value}`);
+        return true;
+      }
+    }
+  }
 
-  find(value) {}
+  find(value) {
+    if (this.head == null) {
+      this.printError_ListEmpty();
+    } else {
+      let index = 0;
+      let tmp = this.head;
+      while (tmp != null && tmp.value != value) {
+        tmp = tmp.nextNode;
+        index++;
+      }
+      if (tmp == null) {
+        console.log(`${value} was not found`);
+        return false;
+      } else {
+        console.log(`Found value: ${tmp.value} at index: ${index}`);
+        return index;
+      }
+    }
+  }
 
   toString() {}
 
@@ -88,14 +162,26 @@ class Node {
 // example uses class syntax - adjust as necessary
 const list = new LinkedList();
 
-// list.append("dog");
-// list.append("cat");
-// list.append("parrot");
-// list.append("hamster");
-// list.append("snake");
-// list.append("turtle");
-// list.prepend("Put me first!");
-// console.log(list.size());
+list.append("dog");
+list.append("cat");
+list.append("parrot");
+list.append("hamster");
+list.append("snake");
+list.append("turtle");
+
+// Tests
+list.prepend("Put me first!");
+console.log(list.size());
 console.log(list.header());
+console.log(list.tail());
+console.log(list.at(0));
+console.log(list.at(1));
+console.log(list.at(2));
+console.log(list.pop());
+console.log(list.contains("dog"));
+console.log(list.contains("fish"));
+console.log(list.find("Put me first!"));
+console.log(list.find("parrot"));
+console.log(list.find("fish"));
 
 console.log(list);
