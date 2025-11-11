@@ -11,3 +11,71 @@
 
 // Revisit MDN docs on classes and associated properties (static, public, private etc.)
 // Odin src on classes: https://www.theodinproject.com/lessons/node-path-javascript-classes
+
+// To test, we're creating an instance of LinkedList:
+// list.append("dog")
+// methods are on the LinkedList class
+
+// https://www.geeksforgeeks.org/javascript/implementation-linkedlist-javascript/
+
+class LinkedList {
+  constructor() {
+    this.head = null;
+  }
+
+  // Methods
+  append(value) {
+    // add value to the end of the list
+    if (this.head == null) {
+      this.head = new Node(value);
+      console.log(this.head);
+    } else {
+      let tmp = this.head;
+      while (tmp.nextNode != null) {
+        tmp = tmp.nextNode;
+      }
+      tmp.nextNode = new Node(value);
+    }
+  }
+
+  prepend(value) {}
+
+  size() {}
+
+  head() {}
+
+  tail() {}
+
+  at(index) {}
+
+  pop() {}
+
+  contains(value) {}
+
+  find(value) {}
+
+  toString() {}
+
+  insertAt() {}
+
+  removeAt() {}
+}
+
+class Node {
+  constructor(value = null) {
+    this.value = value;
+    this.nextNode = null;
+  }
+}
+
+// example uses class syntax - adjust as necessary
+const list = new LinkedList();
+
+list.append("dog");
+list.append("cat");
+list.append("parrot");
+list.append("hamster");
+list.append("snake");
+list.append("turtle");
+
+console.log(list);
