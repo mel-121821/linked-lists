@@ -38,11 +38,28 @@ class LinkedList {
     }
   }
 
-  prepend(value) {}
+  prepend(value) {
+    this.head = new Node(value, this.head);
+  }
 
-  size() {}
+  size() {
+    let sum = 1;
+    let tmp = this.head;
+    while (tmp.nextNode != null) {
+      tmp = tmp.nextNode;
+      sum++;
+    }
+    return sum;
+  }
 
-  head() {}
+  header() {
+    if (this.head != null) {
+      return this.head;
+    } else {
+      console.log("This list is empty!");
+      return null;
+    }
+  }
 
   tail() {}
 
@@ -62,20 +79,23 @@ class LinkedList {
 }
 
 class Node {
-  constructor(value = null) {
+  constructor(value = null, nextNode = null) {
     this.value = value;
-    this.nextNode = null;
+    this.nextNode = nextNode;
   }
 }
 
 // example uses class syntax - adjust as necessary
 const list = new LinkedList();
 
-list.append("dog");
-list.append("cat");
-list.append("parrot");
-list.append("hamster");
-list.append("snake");
-list.append("turtle");
+// list.append("dog");
+// list.append("cat");
+// list.append("parrot");
+// list.append("hamster");
+// list.append("snake");
+// list.append("turtle");
+// list.prepend("Put me first!");
+// console.log(list.size());
+console.log(list.header());
 
 console.log(list);
