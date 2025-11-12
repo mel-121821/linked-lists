@@ -145,11 +145,68 @@ class LinkedList {
     }
   }
 
-  toString() {}
+  toString() {
+    if (this.head == null) {
+      this.printError_ListEmpty();
+    } else {
+      let tmp = this.head;
+      let string = "";
+      while (tmp != null) {
+        string += `(${tmp.value}) -> `;
+        tmp = tmp.nextNode;
+      }
+      if (tmp == null) {
+        string += "null";
+      }
+      return string;
+    }
+  }
 
-  insertAt() {}
+  insertAt(value, index) {
+    if (this.head == null) {
+      // if list is empty, add value at the head
+      this.head = new Node(value);
+    } else {
+      let counter = 0;
+      let prev = null;
+      let current = this.head;
+      while (current != null && counter < index) {
+        prev = current;
+        current = current.nextNode;
+        counter++;
+      }
+      // if index exceeds the length of the list, just place the value at end of list
+      if (current == null) {
+        console.log("index exceeds counter");
+        console.log(current);
+        // if current is null, you can't simply replace null with the new node, you have to point the previous node to the new node, like below
+        prev.nextNode = new Node(value);
+      } else {
+        prev.nextNode = new Node(value, current);
+      }
+    }
+  }
 
-  removeAt() {}
+  removeAt(index) {
+    if (this.head == null) {
+      this.printError_ListEmpty();
+    } else {
+      let counter = 0;
+      let prev = null;
+      let current = this.head;
+      while (current != null && counter < index) {
+        prev = current;
+        current = current.nextNode;
+        counter++;
+      }
+      if (current == null) {
+        console.log(`There is no value at index: ${index}`);
+      } else {
+        console.log(current);
+        prev.nextNode = current.nextNode;
+      }
+    }
+  }
 }
 
 class Node {
@@ -170,8 +227,8 @@ list.append("snake");
 list.append("turtle");
 
 // Tests
-list.prepend("Put me first!");
-console.log(list.size());
+// list.prepend("Put me first!");
+console.log(`# of values in the list: ${list.size()}`);
 console.log(list.header());
 console.log(list.tail());
 console.log(list.at(0));
@@ -183,5 +240,18 @@ console.log(list.contains("fish"));
 console.log(list.find("Put me first!"));
 console.log(list.find("parrot"));
 console.log(list.find("fish"));
+console.log(list.toString());
 
-console.log(list);
+// console.log(list);
+
+list.insertAt("fish", 2);
+console.log(list.toString());
+
+list.insertAt("horse", 12);
+console.log(list.toString());
+
+list.removeAt(4);
+console.log(list.toString());
+
+list.removeAt(12);
+console.log(list.toString());
